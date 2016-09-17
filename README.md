@@ -5,4 +5,4 @@ Mainly used for python ports.
 
 showvictims.py: Want to update a port but don't know what it could break? Show it victims :)
 
-Learn more in my blog post [to be written yet]
+More details in my [blog post](https://chown.me/blog/how-to-update-an-openbsd-port.html)
