@@ -19,7 +19,7 @@ import sys
 
 def req(cur, victim, dep_type):
     rep = []
-    for row in cur.execute("SELECT FULLPKGPATH FROM Ports where " + dep_type + " like ?", ('%'+victim+'%',)):
+    for row in cur.execute("SELECT FULLPKGPATH FROM Ports WHERE " + dep_type + " LIKE ?", ('%'+victim+'%',)):
         rep.append("/usr/ports/" + row[0])
 
     return rep
@@ -37,7 +37,7 @@ def main():
     except sqlite3.OperationalError:
         print("install sqlports (doas pkg_add sqlports)", file=sys.stderr)
         sys.exit(1)
-    
+
     cur = conn.cursor()
     if len(sys.argv) > 2:
         for dep_type in sys.argv[2:]:
