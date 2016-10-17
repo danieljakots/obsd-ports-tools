@@ -17,19 +17,26 @@
 import sqlite3
 import sys
 
+
+def usage():
+    print("usage: " + sys.argv[0] + " port [depends type (build, lib, run, test)]", file=sys.stderr)
+    print("usage: " + sys.argv[0] + " py-babel", file=sys.stderr)
+    sys.exit(1)
+
+
 def req(cur, victim, dep_type):
     rep = []
-    for row in cur.execute("SELECT FULLPKGPATH FROM Ports WHERE " + dep_type + " LIKE ?", ('%'+victim+'%',)):
-        rep.append("/usr/ports/" + row[0])
-
+    try:
+        for row in cur.execute("SELECT FULLPKGPATH FROM Ports where " + dep_type + " like ?", ('%'+victim+'%',)):
+            rep.append("/usr/ports/" + row[0])
+    except sqlite3.OperationalError:
+        print("no such column", file=sys.stderr)
+        usage()
     return rep
 
 def main():
     if len(sys.argv) == 1:
-        print("usage: " + sys.argv[0] + " port [depends type (build, lib, run, test)]", file=sys.stderr)
-        print("usage: " + sys.argv[0] + " py-babel", file=sys.stderr)
-        sys.exit(1)
-
+        usage()
     port = str(sys.argv[1])
 
     try:
