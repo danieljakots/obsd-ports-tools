@@ -18,6 +18,8 @@ import sqlite3
 import sys
 
 
+SQLPORTS = "/usr/local/share/sqlports"
+
 def usage():
     print("usage: " + sys.argv[0] +
           " port [depends type (build, lib, run, test)]", file=sys.stderr)
@@ -43,7 +45,7 @@ def main():
     port = str(sys.argv[1])
 
     try:
-        conn = sqlite3.connect('/usr/local/share/sqlports')
+        conn = sqlite3.connect(SQLPORTS)
     except sqlite3.OperationalError:
         print("install sqlports (doas pkg_add sqlports)", file=sys.stderr)
         sys.exit(1)
