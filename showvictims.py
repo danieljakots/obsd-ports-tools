@@ -14,6 +14,7 @@
 
 # 0. You just DO WHAT THE FUCK YOU WANT TO.
 
+import os.path
 import sqlite3
 import sys
 
@@ -44,9 +45,9 @@ def main():
         usage()
     port = str(sys.argv[1])
 
-    try:
+    if os.path.isfile(SQLPORTS):
         conn = sqlite3.connect(SQLPORTS)
-    except sqlite3.OperationalError:
+    else:
         print("install sqlports (doas pkg_add sqlports)", file=sys.stderr)
         sys.exit(1)
 
