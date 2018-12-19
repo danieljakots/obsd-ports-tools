@@ -1,23 +1,22 @@
 #!/bin/sh
 
-for _chat in /usr/ports/* ; do
-	if [[ ! -d "${_chat}" ]] ; then
+for _cat in /usr/ports/* ; do
+	# not all files are a category directory
+	if [[ ! -d "${_cat}" ]] ; then
 		continue
 	fi
-	if [[ ! -f "${_chat}/Makefile" ]] ; then
+	if [[ ! -f "${_cat}/Makefile" ]] ; then
 		continue
 	fi
-	#echo ${_chat}
-	for _porcpath in ${_chat}/* ; do
-		if [[ ! -f "${_porcpath}/Makefile" ]] ; then
+	for _portpath in ${_cat}/* ; do
+		if [[ ! -f "${_portpath}/Makefile" ]] ; then
 			continue
 		fi
-		_porc=$(basename "${_porcpath}")
-		#echo "${_porc}"
-		hook=$(grep -c "${_porc}" ${_chat}/Makefile)
-		if [[ $hook -lt 1 ]] ; then
-			echo "${_porcpath}"
-			echo $hook
+		_port=$(basename "${_portpath}")
+		_hook=$(grep -c "${_port}" ${_cat}/Makefile)
+		if [[ "${_hook}" -lt 1 ]] ; then
+			echo "${_portpath}"
+			echo "${_hook}"
 		fi
 	done
 done
