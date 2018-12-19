@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sqlite3 /usr/local/share/sqlports "SELECT FULLPKGPATH, BROKEN FROM Ports WHERE BROKEN is not NULL;"
+sqlite3 /usr/local/share/sqlports "select * from Broken WHERE ARCH = 'amd64';"
