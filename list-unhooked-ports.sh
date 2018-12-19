@@ -2,9 +2,6 @@
 
 for _cat in /usr/ports/* ; do
 	# not all files are a category directory
-	if [[ ! -d "${_cat}" ]] ; then
-		continue
-	fi
 	if [[ ! -f "${_cat}/Makefile" ]] ; then
 		continue
 	fi
