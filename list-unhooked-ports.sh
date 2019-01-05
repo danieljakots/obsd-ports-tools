@@ -13,7 +13,6 @@ for _cat in /usr/ports/* ; do
 		_hook=$(grep -c "${_port}" ${_cat}/Makefile)
 		if [[ "${_hook}" -lt 1 ]] ; then
 			echo "${_portpath}"
-			echo "${_hook}"
 		fi
 	done
 done
