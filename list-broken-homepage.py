@@ -23,7 +23,8 @@ if __name__ == "__main__":
     ):
         homepage = row[0]
         fullpkgpath = row[1]
-        maintainer = row[2]
+        # convert "blah <foo@example.com>" to "foo@"
+        maintainer = "".join(row[2].rpartition("<")[2][:-1].rpartition("@")[0:2])
         if homepage[:4] != "http":
             continue
         osef = {"github", "kde", "cpan", "pypi.python.org"}
@@ -45,5 +46,5 @@ if __name__ == "__main__":
                 "{:22}".format(fullpkgpath[:22]),
                 "{:40}".format(homepage[:40]),
                 "{:4}".format(g.status_code),
-                maintainer.partition("<")[2][:-1],
+                maintainer,
             )
