@@ -40,9 +40,9 @@ if __name__ == "__main__":
         try:
             g = requests.get(homepage, headers=headers)
         except requests.exceptions.SSLError:
-            g.status_code = 1000
+            g.status_code = "SSL"
         except requests.exceptions.ConnectionError:
-            g.status_code = 1001
+            g.status_code = "CON"
         if g.status_code != 200:
             print(
                 "{:22}".format(fullpkgpath[:22]),
