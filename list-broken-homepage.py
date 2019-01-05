@@ -48,7 +48,7 @@ if __name__ == "__main__":
             print(
                 "{:20}".format(fullpkgpath[:20]),
                 "{:35}".format(homepage[:35]),
-                "{:3}".format(g.status_code[:3]),
+                "{:3}".format(g.status_code),
                 "{:7}".format(maintainer[:7]),
                 sep="|",
             )
