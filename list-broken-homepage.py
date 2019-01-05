@@ -7,7 +7,9 @@ import sys
 import requests
 
 SQLPORTS = "/usr/local/share/sqlports"
-FAKE_U_A = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"
+FAKE_U_A = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"
+)
 
 
 if __name__ == "__main__":
@@ -34,7 +36,7 @@ if __name__ == "__main__":
                 ignore = 1
         if ignore:
             continue
-        headers = {'User-Agent': FAKE_U_A}
+        headers = {"User-Agent": FAKE_U_A}
         try:
             g = requests.get(homepage, headers=headers)
         except requests.exceptions.SSLError:
