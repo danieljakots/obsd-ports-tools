@@ -47,12 +47,20 @@ def get_all_ports(homepage):
     """Get all the ports using a given homepage."""
     conn = sqlite3.connect(SQLPORTS)
     cur = conn.cursor()
-    ports = []
+    ports = set()
     for row in cur.execute(
-        "SELECT FULLPKGPATH, MAINTAINER FROM Ports WHERE HOMEPAGE=?;",
-        (homepage,)
+        """SELECT FULLPKGPATH, MAINTAINER FROM Ports
+            WHERE HOMEPAGE=? AND (SUBPACKAGE = '-' OR SUBPACKAGE = '-main');""",
+        (homepage,),
     ):
-        ports.append(row)
+        fullpkgpath = row[0]
+        maintainer = row[1]
+        # remove flavors and subpackages, ports is a set so duplicate will be removed
+        if "," in fullpkgpath:
+            fullpkgpath = fullpkgpath.partition(",")[0]
+        ports.add((fullpkgpath, maintainer))
+    if not len(ports):
+        print(homepage)
     return ports
 
 
