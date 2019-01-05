@@ -19,6 +19,7 @@ if __name__ == "__main__":
         print("install sqlports (doas pkg_add sqlports)", file=sys.stderr)
         sys.exit(1)
 
+    print(68 * "-")
     cur = conn.cursor()
     for row in cur.execute(
         "SELECT HOMEPAGE, FULLPKGPATH, MAINTAINER FROM Ports WHERE HOMEPAGE NOT NULL;"
@@ -45,8 +46,10 @@ if __name__ == "__main__":
             g.status_code = "CON"
         if g.status_code != 200:
             print(
-                "{:22}".format(fullpkgpath[:22]),
-                "{:40}".format(homepage[:40]),
-                "{:4}".format(g.status_code),
-                maintainer,
+                "{:20}".format(fullpkgpath[:20]),
+                "{:35}".format(homepage[:35]),
+                "{:3}".format(g.status_code[:3]),
+                "{:7}".format(maintainer[:7]),
+                sep="|",
             )
+    print(68 * "-")
