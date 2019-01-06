@@ -79,8 +79,7 @@ def main():
         homepage, status_code = check_homepage(homepage)
         if status_code == 200:
             continue
-        ports = get_all_ports(homepage)
-        for port in ports:
+        for port in get_all_ports(homepage):
             fullpkgpath = port[0]
             # convert "blah <foo@example.com>" to "foo@"
             maintainer = "".join(port[1].rpartition("<")[2][:-1].rpartition("@")[0:2])
