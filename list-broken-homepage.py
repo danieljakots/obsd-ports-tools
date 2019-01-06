@@ -103,7 +103,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     print("CON = couldn't connect (might be DNS), TMO = Timeout, SSL = SSL")
-    print(68 * "-")
+    # print a nice table
+    print("+" + 20 * "-" + "+" + 33 * "-" + "+" + 3 * "-" + "+" + 7 * "-" + "+")
     main()
-    print(68 * "-")
+    print("+" + 20 * "-" + "+" + 33 * "-" + "+" + 3 * "-" + "+" + 7 * "-" + "+")
     print("CON = couldn't connect (might be DNS), TMO = Timeout, SSL = SSL")
