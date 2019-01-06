@@ -59,8 +59,6 @@ def get_all_ports(homepage):
         if "," in fullpkgpath:
             fullpkgpath = fullpkgpath.partition(",")[0]
         ports.add((fullpkgpath, maintainer))
-    if not len(ports):
-        print(homepage)
     return ports
 
 
