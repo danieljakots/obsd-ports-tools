@@ -18,7 +18,7 @@ def get_all_homepages():
     cur = conn.cursor()
     homepages = []
     for row in cur.execute(
-        "SELECT DISTINCT HOMEPAGE FROM Ports WHERE HOMEPAGE NOT NULL;"
+        "SELECT DISTINCT HOMEPAGE FROM Ports WHERE HOMEPAGE IS NOT NULL;"
     ):
         homepages.append(row[0])
     return homepages
