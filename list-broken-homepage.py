@@ -16,12 +16,10 @@ def get_all_homepages():
     """Get all distinct homepages used in ports."""
     conn = sqlite3.connect(SQLPORTS)
     cur = conn.cursor()
-    homepages = []
     for row in cur.execute(
-        "SELECT DISTINCT HOMEPAGE FROM Ports WHERE HOMEPAGE IS NOT NULL;"
+        "SELECT DISTINCT HOMEPAGE FROM _Ports WHERE HOMEPAGE IS NOT NULL;"
     ):
-        homepages.append(row[0])
-    return homepages
+        yield row[0]
 
 
 def check_homepage(homepage):
@@ -47,19 +45,18 @@ def get_all_ports(homepage):
     """Get all the ports using a given homepage."""
     conn = sqlite3.connect(SQLPORTS)
     cur = conn.cursor()
-    ports = set()
     for row in cur.execute(
-        """SELECT FULLPKGPATH, MAINTAINER FROM Ports
-            WHERE HOMEPAGE=? AND (SUBPACKAGE = '-' OR SUBPACKAGE = '-main');""",
+        """SELECT DISTINCT _Ports.FULLPKGNAME, _Email.VALUE
+            FROM _Ports, _Email, _Paths
+            WHERE _Ports.MAINTAINER = _Email.KEYREF
+              AND _Ports.FULLPKGPATH = _Paths.ID
+              AND _Paths.PKGPATH = _Paths.ID
+              AND _Ports.HOMEPAGE = ?;""",
         (homepage,),
     ):
         fullpkgpath = row[0]
         maintainer = row[1]
-        # remove flavors and subpackages, ports is a set so duplicate will be removed
-        if "," in fullpkgpath:
-            fullpkgpath = fullpkgpath.partition(",")[0]
-        ports.add((fullpkgpath, maintainer))
-    return ports
+        yield (fullpkgpath, maintainer)
 
 
 def main():
