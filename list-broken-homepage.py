@@ -28,7 +28,7 @@ def check_homepage(homepage):
     """Try to connect to the homepage."""
     # work around HOMEPAGE ?= http;//drupal.org/project/${MODDRUPAL_PROJECT}/
     if homepage[:5] == "http;":
-        homepage = homepage.replace(";", ":")
+        return homepage, 200
     print(homepage, file=sys.stderr)
     headers = {"User-Agent": FAKE_U_A}
     try:
