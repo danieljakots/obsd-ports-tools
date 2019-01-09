@@ -46,7 +46,7 @@ def get_all_ports(homepage):
     conn = sqlite3.connect(SQLPORTS)
     cur = conn.cursor()
     for row in cur.execute(
-        """SELECT DISTINCT _Ports.FULLPKGNAME, _Email.VALUE
+        """SELECT DISTINCT _Paths.FULLPKGPATH, _Email.VALUE
             FROM _Ports, _Email, _Paths
             WHERE _Ports.MAINTAINER = _Email.KEYREF
               AND _Ports.FULLPKGPATH = _Paths.ID
