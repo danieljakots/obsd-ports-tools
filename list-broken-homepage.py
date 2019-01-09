@@ -65,14 +65,6 @@ def main():
         # ignore non web stuff (ftp, gopher)
         if homepage[:4] != "http":
             continue
-        # ignore mainstream homepa
-        osef = {"github", "kde", "cpan", "pypi.python.org"}
-        ignore = 0
-        for idgaf in osef:
-            if idgaf in homepage:
-                ignore = 1
-        if ignore:
-            continue
         homepage, status_code = check_homepage(homepage)
         if status_code == 200:
             continue
