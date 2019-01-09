@@ -34,7 +34,10 @@ def check_homepage(homepage):
         status_code = g.status_code
     except requests.exceptions.SSLError:
         status_code = "SSL"
-    except requests.exceptions.ConnectionError:
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.ChunkedEncodingError,
+    ):
         status_code = "CON"
     except requests.exceptions.ReadTimeout:
         status_code = "TMO"
