@@ -19,7 +19,11 @@ def send_email(maintainer, ports):
             f"You're marked as maintainer for some ports on OpenBSD.\n"
             "This email is to check if you still wants to maintain them.\n\n"
             "Here's the ports you're the maintainer of:\n"
-            f"{ports}"
+            f"{ports}\n\n"
+            "If we don't hear from you before beginning of June we'll remove\n"
+            "you from the maintainer for all these ports. Having inactive or\n"
+            "unresponsive maintainer is unpleasant for contributors hence this\n"
+            "mail. Thanks for your understanding!"
             f"\n\nCheers,\n-- \n"
             "Daniel")
     print(body)
