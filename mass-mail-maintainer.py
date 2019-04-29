@@ -8,20 +8,6 @@ import json
 import requests
 
 PORTROACH = "https://portroach.openbsd.org/json/totals.json"
-SQLPORTS = "/usr/local/share/sqlports"
-
-
-def get_ports(cur, maintainer):
-    for row in cur.execute(
-        """SELECT DISTINCT _Paths.FULLPKGPATH
-            FROM _Ports, _Email, _Paths
-            WHERE _Ports.FULLPKGPATH = _Paths.ID
-            AND _Paths.PKGPATH = _Paths.ID
-            AND _Ports.MAINTAINER = _Email.KeyRef
-            AND _Email.Value like ?;""",
-        (maintainer,),
-    ):
-        yield row[0]
 
 
 def send_email(maintainer, ports):
@@ -54,8 +40,6 @@ def portroach(maintainer):
 
 
 def main():
-    # conn = sqlite3.connect(SQLPORTS)
-    # cur = conn.cursor()
     r = requests.get(PORTROACH)
     data = json.loads(r.text)
     for n, result in enumerate(data["results"]):
@@ -70,9 +54,6 @@ def main():
         # for line in data:
         #     print("   ", line)
         send_email(maintainer, data)
-        # maintained_ports = []
-        # for port in get_ports(cur, maintainer):
-        #    maintained_ports.append(port)
 
 
 if __name__ == "__main__":
