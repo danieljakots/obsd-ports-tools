@@ -5,6 +5,9 @@
 
 import json
 
+import smtplib
+import email.mime.text
+
 import requests
 
 PORTROACH = "https://portroach.openbsd.org/json/totals.json"
@@ -25,7 +28,13 @@ def send_email(maintainer, ports):
             "Thanks for your understanding!\n"
             f"\nCheers,\n-- \n"
             "Daniel")
-    print(body)
+    msg = email.mime.text.MIMEText(str(body))
+    msg['Subject'] = "About OpenBSD ports you maintain"
+    msg['From'] = "Daniel Jakots <dont@spam.me>"
+    msg['To'] = maintainer
+    s = smtplib.SMTP("localhost")
+    s.send_message(msg)
+    s.quit()
 
 
 def portroach(maintainer):
