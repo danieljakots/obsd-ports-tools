@@ -39,7 +39,7 @@ def send_email(maintainer, ports):
             f"\nCheers,\n-- \n"
             "Daniel")
     msg = email.mime.text.MIMEText(str(body))
-    msg['Subject'] = "About OpenBSD ports you maintain"
+    msg['Subject'] = "OpenBSD ports - maintainer check"
     msg['From'] = "Daniel Jakots <dont@spam.me>"
     msg['To'] = maintainer
     s = smtplib.SMTP("localhost")
