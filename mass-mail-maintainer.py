@@ -16,15 +16,15 @@ def send_email(maintainer, ports):
     print(f"to: {maintainer}")
     ports = "\n".join(ports)
     body = (f"Hi {first_name},\n\n"
-            f"You're marked as maintainer for some ports on OpenBSD.\n"
-            "This email is to check if you still wants to maintain them.\n\n"
-            "Here's the ports you're the maintainer of:\n"
+            "This email is a check to verify OpenBSD ports maintainers can\n"
+            "be reached and wish to remain active.\n"
+            "You currently maintain the following port(s):\n"
             f"{ports}\n\n"
-            "If we don't hear from you before beginning of June we'll remove\n"
-            "you from the maintainer for all these ports. Having inactive or\n"
-            "unresponsive maintainer is unpleasant for contributors hence this\n"
-            "mail. Thanks for your understanding!"
-            f"\n\nCheers,\n-- \n"
+            "If you wish to continue, please respond. If we don't hear from\n"
+            "you before the beginning of June, or if you wish to release a\n"
+            "particular port, we will drop the maintainer line.\n"
+            "Thanks for your understanding!\n"
+            f"\nCheers,\n-- \n"
             "Daniel")
     print(body)
 
