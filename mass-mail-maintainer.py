@@ -13,7 +13,6 @@ PORTROACH = "https://portroach.openbsd.org/json/totals.json"
 def send_email(maintainer, ports):
     first_name = maintainer.split(" ")[0].capitalize()
     # hack - https://stackoverflow.com/a/44780467
-    print(f"to: {maintainer}")
     ports = "\n".join(ports)
     body = (f"Hi {first_name},\n\n"
             "This email is a check to verify OpenBSD ports maintainers can\n"
@@ -51,10 +50,7 @@ def main():
         # ignore multi maintainership
         if maintainer.count("@") > 1:
             continue
-        print(maintainer)
         data = portroach(maintainer)
-        # for line in data:
-        #     print("   ", line)
         send_email(maintainer, data)
 
 
