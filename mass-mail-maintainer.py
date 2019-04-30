@@ -46,9 +46,7 @@ def portroach(maintainer):
 def main():
     r = requests.get(PORTROACH)
     data = json.loads(r.text)
-    for n, result in enumerate(data["results"]):
-        if n > 4:
-            break
+    for result in data["results"]:
         maintainer = result["maintainer"]
         # ignore multi maintainership
         if maintainer.count("@") > 1:
