@@ -3,6 +3,7 @@
 # Copyright (c) 2019 Daniel Jakots
 # Licensed under the MIT license. See the LICENSE file.
 
+import datetime
 import json
 
 import smtplib
@@ -11,6 +12,12 @@ import email.mime.text
 import requests
 
 PORTROACH = "https://portroach.openbsd.org/json/totals.json"
+
+
+def in_two_weeks():
+    today = datetime.date.today()
+    today_in_two_weeks = today + datetime.timedelta(days=14)
+    return today_in_two_weeks.strftime("%Y/%m/%d")
 
 
 def send_email(maintainer, ports):
@@ -23,8 +30,8 @@ def send_email(maintainer, ports):
             "You currently maintain the following port(s):\n"
             f"{ports}\n\n"
             "If you wish to continue, please respond. If we don't hear from\n"
-            "you before the beginning of June, or if you wish to release a\n"
-            "particular port, we will drop the maintainer line.\n"
+            f"you before {in_two_weeks()}, or if you wish to release a particular\n"
+            "port, we will drop the maintainer line.\n"
             "Thanks for your understanding!\n"
             f"\nCheers,\n-- \n"
             "Daniel")
