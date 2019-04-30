@@ -11,7 +11,7 @@ import email.mime.text
 
 import requests
 
-PORTROACH = "https://portroach.openbsd.org/json/totals.json"
+PORTROACH = "https://portroach.openbsd.org"
 
 
 def in_two_weeks():
@@ -45,7 +45,7 @@ def send_email(maintainer, ports):
 
 
 def portroach(maintainer):
-    g = requests.get(f"https://portroach.openbsd.org/json/{maintainer}.json")
+    g = requests.get(f"{PORTROACH}/json/{maintainer}.json")
     maintained_ports = g.json()
     result = []
     for port in maintained_ports:
@@ -59,7 +59,7 @@ def portroach(maintainer):
 
 
 def main():
-    r = requests.get(PORTROACH)
+    r = requests.get(f"{PORTROACH}/json/totals.json")
     data = json.loads(r.text)
     for result in data["results"]:
         maintainer = result["maintainer"]
