@@ -5,6 +5,7 @@
 
 import datetime
 import json
+import urllib.parse
 
 import smtplib
 import email.mime.text
@@ -23,12 +24,14 @@ def in_two_weeks():
 def send_email(maintainer, ports):
     name = maintainer.split("<")[0].strip().title()
     # hack - https://stackoverflow.com/a/44780467
+    portroach_link = f"{PORTROACH}/{urllib.parse.quote(maintainer)}.html"
     ports = "\n".join(ports)
     body = (f"Hi {name},\n\n"
             "This email is a check to verify OpenBSD ports maintainers can\n"
             "be reached and wish to remain active.\n\n"
             "You currently maintain the following port(s):\n"
             f"{ports}\n\n"
+            f"You can check {portroach_link}\n\n"
             "If you wish to continue, please respond. If we don't hear from\n"
             f"you before {in_two_weeks()}, or if you wish to release a particular\n"
             "port, we will drop the maintainer line.\n"
@@ -49,12 +52,7 @@ def portroach(maintainer):
     maintained_ports = g.json()
     result = []
     for port in maintained_ports:
-        results = port["basepkgpath"]
-        if port["newver"]:
-            results = results + f" (newer version {port['newver']} is available)"
-        else:
-            results = results + " (up to date)"
-        result.append(results)
+        result.append(port["basepkgpath"])
     return result
 
 
