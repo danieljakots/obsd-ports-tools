@@ -16,7 +16,7 @@ def send_email(maintainer, ports):
     ports = "\n".join(ports)
     body = (f"Hi {first_name},\n\n"
             "This email is a check to verify OpenBSD ports maintainers can\n"
-            "be reached and wish to remain active.\n"
+            "be reached and wish to remain active.\n\n"
             "You currently maintain the following port(s):\n"
             f"{ports}\n\n"
             "If you wish to continue, please respond. If we don't hear from\n"
