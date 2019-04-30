@@ -56,15 +56,21 @@ def portroach(maintainer):
     return result
 
 
+def ignore(maintainer):
+    if maintainer == "the openbsd ports mailing-list <ports@openbsd.org>":
+        return True
+    # ignore multi maintainership
+    if maintainer.count("@") > 1:
+        return True
+    return False
+
+
 def main():
     r = requests.get(f"{PORTROACH}/json/totals.json")
     data = json.loads(r.text)
     for result in data["results"]:
         maintainer = result["maintainer"]
-        if maintainer == "the openbsd ports mailing-list <ports@openbsd.org>":
-            continue
-        # ignore multi maintainership
-        if maintainer.count("@") > 1:
+        if ignore(maintainer):
             continue
         data = portroach(maintainer)
         send_email(maintainer, data)
