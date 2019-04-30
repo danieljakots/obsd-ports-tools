@@ -61,6 +61,8 @@ def main():
     data = json.loads(r.text)
     for result in data["results"]:
         maintainer = result["maintainer"]
+        if maintainer == "the openbsd ports mailing-list <ports@openbsd.org>":
+            continue
         # ignore multi maintainership
         if maintainer.count("@") > 1:
             continue
