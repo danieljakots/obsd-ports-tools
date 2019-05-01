@@ -5,7 +5,6 @@
 
 import datetime
 import json
-import urllib.parse
 import time
 
 import smtplib
@@ -25,7 +24,6 @@ def in_two_weeks():
 def send_email(maintainer, ports):
     time.sleep(30)
     name = maintainer.split("<")[0].strip().title()
-    portroach_link = f"{PORTROACH}/{urllib.parse.quote(maintainer)}.html"
     # hack - https://stackoverflow.com/a/44780467
     ports = "\n".join(ports)
     body = (f"Hi {name},\n\n"
@@ -33,10 +31,9 @@ def send_email(maintainer, ports):
             "be reached and wish to remain active.\n\n"
             "You currently maintain the following port(s):\n"
             f"{ports}\n\n"
-            f"You can check {portroach_link}\n\n"
-            "If you wish to continue, please respond. If we don't hear from\n"
-            f"you before {in_two_weeks()}, or if you wish to release a particular\n"
-            "port, we will drop the maintainer line.\n"
+            "If you wish to continue, please reply to this email letting me know.\n"
+            f"If we don't hear from you before {in_two_weeks()}, or if you wish\n"
+            "to release a particular port, we will drop the maintainer line.\n"
             "Thanks for your understanding!\n"
             f"\nCheers,\n-- \n"
             "Daniel")
