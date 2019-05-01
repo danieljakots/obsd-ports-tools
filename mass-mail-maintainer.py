@@ -6,6 +6,7 @@
 import datetime
 import json
 import urllib.parse
+import time
 
 import smtplib
 import email.mime.text
@@ -22,6 +23,7 @@ def in_two_weeks():
 
 
 def send_email(maintainer, ports):
+    time.sleep(30)
     name = maintainer.split("<")[0].strip().title()
     portroach_link = f"{PORTROACH}/{urllib.parse.quote(maintainer)}.html"
     # hack - https://stackoverflow.com/a/44780467
