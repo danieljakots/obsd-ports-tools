@@ -23,8 +23,8 @@ def in_two_weeks():
 
 def send_email(maintainer, ports):
     name = maintainer.split("<")[0].strip().title()
-    # hack - https://stackoverflow.com/a/44780467
     portroach_link = f"{PORTROACH}/{urllib.parse.quote(maintainer)}.html"
+    # hack - https://stackoverflow.com/a/44780467
     ports = "\n".join(ports)
     body = (f"Hi {name},\n\n"
             "This email is a check to verify OpenBSD ports maintainers can\n"
