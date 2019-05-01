@@ -65,13 +65,14 @@ def ignore(maintainer):
 
 
 def main():
+    today = datetime.date.today().strftime("%Y/%m/%d")
     r = requests.get(f"{PORTROACH}/json/totals.json")
     data = json.loads(r.text)
     for result in data["results"]:
         maintainer = result["maintainer"]
         if ignore(maintainer):
             continue
-        print(maintainer)
+        print(today, maintainer)
         data = portroach(maintainer)
         send_email(maintainer, data)
 
