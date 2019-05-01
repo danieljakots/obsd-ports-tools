@@ -74,6 +74,7 @@ def main():
         maintainer = result["maintainer"]
         if ignore(maintainer):
             continue
+        print(maintainer)
         data = portroach(maintainer)
         send_email(maintainer, data)
 
