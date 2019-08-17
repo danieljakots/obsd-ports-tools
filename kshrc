@@ -4,7 +4,7 @@ alias portspldc='make port-lib-depends-check'
 alias portsldc='make lib-depends-check'
 alias portsplif='diff -up pkg/PLIST.orig pkg/PLIST'
 alias portstsilp='mv pkg/PLIST.orig pkg/PLIST'
-alias portspy3plist='FLAVOR=python3 make REVISION=999 plist && sed -i /PYCACHE}.$/s,lib,\${MODPY_COMMENT}lib, pkg/PLIST'
+alias portspy3plist='FLAVOR=python3 make REVISION=999 plist'
 alias portsrc='cd `make show=WRKSRC`'
 alias portsfast='MAKE_JOBS=4 make'
 
