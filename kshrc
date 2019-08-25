@@ -17,11 +17,3 @@ portspygrep() { (cd /usr/ports && grep "$1" */py-*/Makefile ) ;}
 portslib() { nm -g "$1" | cut -c10- | grep -e^T > /tmp/"$(pwd |xargs basename)" ;}
 portsfind() { find /usr/ports -iname "${1}" -exec grep -iH ${2} {} \; ;}
 portsgrep() { ( cd /usr/ports && grep "$1" */*/Makefile */*/*/Makefile ) ;}
-
-
-
-# This version for when not running PORTS_PRIVSEP=Yes
-#vibak() { for i; do [ -f "$i.orig" ] || cp "$i" "$i.orig"; done; vi "$@" ; }
-
-# For when running PORTS_PRIVSEP=Yes
-function vibak { for i; do [ -f "$i.orig" ] || doas -u _pbuild cp "$i" "$i.orig"; done; doas -u _pbuild env HOME=/home/pbuild /usr/bin/vi "$@" ; }
