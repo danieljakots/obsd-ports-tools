@@ -13,7 +13,7 @@ portslessdiff() { less /usr/ports/mystuff/${PWD##*/}.diff  ; }
 portscp() { scp /usr/ports/mystuff/${PWD##*/}.diff virtie:/var/www/iota/ports/ && echo https://chown.me/iota/ports/${PWD##*/}.diff ;}
 portspy3() { FLAVOR="python3" make "$@" ;}
 portspy3and2() { make "$@" ; FLAVOR="python3" make "$@" ;}
-portspygrep() { (cd /usr/ports && grep "$1" */py-*/Makefile ) ;}
+portspygrep() { (cd /usr/ports && grep "$@" */py-*/Makefile ) ;}
 portslib() { nm -g "$1" | cut -c10- | grep -e^T > /tmp/"$(pwd |xargs basename)" ;}
 portsfind() { find /usr/ports -iname "${1}" -exec grep -iH ${2} {} \; ;}
-portsgrep() { ( cd /usr/ports && grep "$1" */*/Makefile */*/*/Makefile ) ;}
+portsgrep() { ( cd /usr/ports && grep "$@" */*/Makefile */*/*/Makefile ) ;}
