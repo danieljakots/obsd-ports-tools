@@ -149,7 +149,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// time.RFC3339 is 15:04:05
+	// time.RFC3339 is 15:04:05, here we have '-', not ':'
 	fmt.Printf("V =\t\t%s\nCID =\t\t%s\n", t.Format("2006-01-02T15-04-05Z07:00"), commit)
 	fmt.Printf("\nportgen go %s@v0.0.0-%s-%s\n", ghUrl, releaseName, commitShort)
 }
