@@ -151,4 +151,9 @@ func main() {
 	}
 	// time.RFC3339 is 15:04:05, here we have '-', not ':'
 	fmt.Printf("V =\t\t%s\nCID =\t\t%s\n", t.Format("2006-01-02T15-04-05Z07:00"), commit)
+	fmt.Println("Add these lines to Makefile")
+	fmt.Println("Run `make modgo-gen-modules > modules.inc`")
+	fmt.Println("Remove MODGO_VERSION from modules.inc")
+	fmt.Println("Run `make makesum`")
+	fmt.Println("Run `make package`")
 }
