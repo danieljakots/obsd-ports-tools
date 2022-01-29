@@ -35,6 +35,6 @@ do
 done
 
 # give time after the ping for sshd to start
-sleep 3
+sleep 6
 
 notify
