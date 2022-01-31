@@ -8,7 +8,8 @@ set -eu
 usage() {
 	echo "usage: ${0##*/} TARGET" 1>&2
 	echo "usage: ${0##*/} TARGET TTL" 1>&2
-	echo "\nBy default TTL is 30" 1>&2
+	echo "" 1>&2
+	echo "By default TTL is 30" 1>&2
 	exit 1
 }
 
@@ -29,9 +30,9 @@ do
 	res=$?
 	set -e
 	[ ${res} -eq 0 ] && break
-	iter=$(( ${iter} + 1 ))
+	iter=$(( iter + 1 ))
 	# timed out
-	[ ${iter} -gt ${_ttl} ] && notify && exit 1
+	[ "${iter}" -gt "${_ttl}" ] && notify && exit 1
 done
 
 # give time after the ping for sshd to start
